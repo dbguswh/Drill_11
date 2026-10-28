@@ -108,6 +108,8 @@ class Boy:
         elif self.state == 'RUN':
             run_row = 100 if self.face_dir == 1 else 0
             self.image.clip_draw(self.frame * 100, run_row, 100, 100, self.x, self.y)
+        elif self.state == 'AUTORUN':
+            self.auto_run.draw(self)
         elif self.state == 'SLEEP':
             # Head on the left and face upward, regardless of the standing direction.
             self.image.clip_composite_draw(
