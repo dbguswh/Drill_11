@@ -31,3 +31,8 @@ class AutoRun(State):
         elif boy.x <= left_edge:
             boy.x = left_edge
             boy.face_dir = 1
+
+    def animate(self, boy, now):
+        if now - self.last_frame_time >= self.FRAME_DURATION:
+            boy.frame = (boy.frame + 1) % 8
+            self.last_frame_time = now
