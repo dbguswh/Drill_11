@@ -45,3 +45,6 @@ class AutoRun(State):
             boy.FRAME_WIDTH, boy.FRAME_WIDTH,
             boy.x, boy.y, size, size,
         )
+
+    def expired(self, now):
+        return now - self.started_at >= self.DURATION
