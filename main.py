@@ -17,6 +17,8 @@ def handle_events():
             running = False
         elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE and boy.state == 'SLEEP':
             boy.wake_up()
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_a:
+            boy.press_auto_run()
         elif event.type == SDL_KEYDOWN and event.key in (SDLK_LEFT, SDLK_RIGHT):
             boy.press_direction(-1 if event.key == SDLK_LEFT else 1)
         elif event.type == SDL_KEYUP and event.key in (SDLK_LEFT, SDLK_RIGHT):
