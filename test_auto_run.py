@@ -47,6 +47,18 @@ class AutoRunTests(unittest.TestCase):
         self.boy.draw()
         self.assertEqual(self.image.draw_calls[-1][-2:], (150, 150))
 
+    def test_auto_run_turns_at_both_screen_edges(self):
+        self.boy.press_auto_run()
+        self.boy.x = 720
+        self.clock.advance(0.1)
+        self.boy.update()
+        self.assertEqual((self.boy.x, self.boy.face_dir), (725, -1))
+
+        self.boy.x = 80
+        self.clock.advance(0.1)
+        self.boy.update()
+        self.assertEqual((self.boy.x, self.boy.face_dir), (75, 1))
+
 
 if __name__ == '__main__':
     unittest.main()
