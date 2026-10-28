@@ -36,3 +36,12 @@ class AutoRun(State):
         if now - self.last_frame_time >= self.FRAME_DURATION:
             boy.frame = (boy.frame + 1) % 8
             self.last_frame_time = now
+
+    def draw(self, boy):
+        run_row = 100 if boy.face_dir == 1 else 0
+        size = boy.FRAME_WIDTH * self.SCALE
+        boy.image.clip_draw(
+            boy.frame * boy.FRAME_WIDTH, run_row,
+            boy.FRAME_WIDTH, boy.FRAME_WIDTH,
+            boy.x, boy.y, size, size,
+        )
