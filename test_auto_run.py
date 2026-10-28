@@ -59,6 +59,19 @@ class AutoRunTests(unittest.TestCase):
         self.boy.update()
         self.assertEqual((self.boy.x, self.boy.face_dir), (75, 1))
 
+    def test_auto_run_returns_to_idle_after_five_seconds(self):
+        self.boy.press_auto_run()
+        self.clock.advance(4.99)
+        self.boy.update()
+        self.assertEqual(self.boy.state, 'AUTORUN')
+
+        self.clock.advance(0.01)
+        self.boy.update()
+        self.assertEqual(self.boy.state, 'IDLE')
+        self.assertEqual(self.boy.idle_started_at, self.clock.now)
+        self.boy.draw()
+        self.assertEqual(len(self.image.draw_calls[-1]), 6)
+
 
 if __name__ == '__main__':
     unittest.main()
