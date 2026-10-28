@@ -3,6 +3,7 @@ import time
 
 from pico2d import get_canvas_width, load_image
 from transitions import Machine
+from auto_run import AutoRun
 
 class Boy:
     IDLE_FRAME_DURATION = 0.1
@@ -21,9 +22,10 @@ class Boy:
         self.held_directions = set()
         self.canvas_width = get_canvas_width()
         self.image = load_image('animation_sheet.png')
+        self.auto_run = AutoRun()
         self.machine = Machine(
             model=self,
-            states=['IDLE', 'RUN', 'SLEEP'],
+            states=['IDLE', 'RUN', 'SLEEP', self.auto_run],
             transitions=[
                 {'trigger': 'fall_asleep', 'source': 'IDLE', 'dest': 'SLEEP', 'after': 'begin_sleep'},
                 {'trigger': 'wake_up', 'source': 'SLEEP', 'dest': 'IDLE', 'after': 'begin_idle'},
