@@ -39,8 +39,10 @@ class AutoRunTests(unittest.TestCase):
 
     def test_idle_a_starts_real_auto_run_state_and_draws_larger(self):
         self.assertIs(self.boy.machine.get_state('AUTORUN'), self.boy.auto_run)
+        self.assertFalse(self.boy.is_invincible)
         self.boy.press_auto_run()
         self.assertEqual(self.boy.state, 'AUTORUN')
+        self.assertTrue(self.boy.is_invincible)
         self.clock.advance(0.1)
         self.boy.update()
         self.assertAlmostEqual(self.boy.x, 430)
@@ -69,6 +71,7 @@ class AutoRunTests(unittest.TestCase):
         self.clock.advance(0.01)
         self.boy.update()
         self.assertEqual(self.boy.state, 'IDLE')
+        self.assertFalse(self.boy.is_invincible)
         self.assertEqual(self.boy.idle_started_at, self.clock.now)
         self.boy.draw()
         self.assertEqual(len(self.image.draw_calls[-1]), 6)
@@ -77,6 +80,7 @@ class AutoRunTests(unittest.TestCase):
         self.boy.press_auto_run()
         self.boy.press_direction(-1)
         self.assertEqual((self.boy.state, self.boy.face_dir), ('RUN', -1))
+        self.assertFalse(self.boy.is_invincible)
 
         starting_x = self.boy.x
         self.clock.advance(0.1)
