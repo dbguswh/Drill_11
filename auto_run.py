@@ -19,3 +19,6 @@ class AutoRun(State):
         self.last_frame_time = now
         boy.frame = 0
         boy.last_update_time = now
+
+    def move(self, boy, elapsed):
+        boy.x += boy.face_dir * self.SPEED * elapsed
