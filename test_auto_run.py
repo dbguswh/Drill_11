@@ -88,6 +88,26 @@ class AutoRunTests(unittest.TestCase):
         self.boy.release_direction(-1)
         self.assertEqual(self.boy.state, 'IDLE')
 
+    def test_a_is_ignored_outside_idle_and_does_not_reset_timer(self):
+        self.boy.press_auto_run()
+        started_at = self.boy.auto_run.started_at
+        self.clock.advance(2)
+        self.boy.press_auto_run()
+        self.assertEqual(self.boy.auto_run.started_at, started_at)
+
+        self.boy.press_direction(1)
+        self.boy.press_auto_run()
+        self.assertEqual(self.boy.state, 'RUN')
+
+        self.boy.release_direction(1)
+        self.clock.advance(5)
+        self.boy.update()
+        self.assertEqual(self.boy.state, 'SLEEP')
+        self.boy.press_auto_run()
+        self.assertEqual(self.boy.state, 'SLEEP')
+        self.boy.wake_up()
+        self.assertEqual(self.boy.state, 'IDLE')
+
 
 if __name__ == '__main__':
     unittest.main()
