@@ -22,3 +22,12 @@ class AutoRun(State):
 
     def move(self, boy, elapsed):
         boy.x += boy.face_dir * self.SPEED * elapsed
+        half_width = boy.FRAME_WIDTH * self.SCALE / 2
+        left_edge = half_width
+        right_edge = boy.canvas_width - half_width
+        if boy.x >= right_edge:
+            boy.x = right_edge
+            boy.face_dir = -1
+        elif boy.x <= left_edge:
+            boy.x = left_edge
+            boy.face_dir = 1
