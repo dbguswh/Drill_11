@@ -94,6 +94,9 @@ class Boy:
             if now - self.last_frame_time >= self.RUN_FRAME_DURATION:
                 self.frame = (self.frame + 1) % 8
                 self.last_frame_time = now
+        elif self.state == 'AUTORUN':
+            self.auto_run.move(self, elapsed)
+            self.auto_run.animate(self, now)
 
     def draw(self):
         idle_row = 300 if self.face_dir == 1 else 200
