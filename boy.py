@@ -56,6 +56,10 @@ class Boy:
     def begin_auto_run(self):
         self.auto_run.begin(self, time.monotonic())
 
+    @property
+    def is_invincible(self):
+        return self.state == 'AUTORUN'
+
     def press_auto_run(self):
         if self.state == 'IDLE':
             self.activate_auto_run()
