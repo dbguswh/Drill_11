@@ -72,6 +72,21 @@ class AutoRunTests(unittest.TestCase):
         self.boy.draw()
         self.assertEqual(len(self.image.draw_calls[-1]), 6)
 
+    def test_direction_key_cancels_auto_run_and_uses_normal_run(self):
+        self.boy.press_auto_run()
+        self.boy.press_direction(-1)
+        self.assertEqual((self.boy.state, self.boy.face_dir), ('RUN', -1))
+
+        starting_x = self.boy.x
+        self.clock.advance(0.1)
+        self.boy.update()
+        self.assertAlmostEqual(self.boy.x, starting_x - 20)
+        self.boy.draw()
+        self.assertEqual(len(self.image.draw_calls[-1]), 6)
+
+        self.boy.release_direction(-1)
+        self.assertEqual(self.boy.state, 'IDLE')
+
 
 if __name__ == '__main__':
     unittest.main()
