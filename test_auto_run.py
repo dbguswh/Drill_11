@@ -45,6 +45,7 @@ class AutoRunTests(unittest.TestCase):
         self.boy.update()
         self.assertAlmostEqual(self.boy.x, 430)
         self.boy.draw()
+        self.assertEqual(self.image.draw_calls[-1][-3], 105)
         self.assertEqual(self.image.draw_calls[-1][-2:], (150, 150))
 
     def test_auto_run_turns_at_both_screen_edges(self):
