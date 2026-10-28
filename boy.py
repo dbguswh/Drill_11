@@ -56,6 +56,10 @@ class Boy:
     def begin_auto_run(self):
         self.auto_run.begin(self, time.monotonic())
 
+    def press_auto_run(self):
+        if self.state == 'IDLE':
+            self.activate_auto_run()
+
     def press_direction(self, direction):
         if direction in self.held_directions:
             return
