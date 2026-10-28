@@ -4,7 +4,7 @@ from transitions import State
 class AutoRun(State):
     """State object for the boy's automatic run."""
 
-    SPEED = 300
+    SPEED = 450
     SCALE = 1.5
     DURATION = 5.0
     FRAME_DURATION = 0.08

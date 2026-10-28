@@ -45,7 +45,7 @@ class AutoRunTests(unittest.TestCase):
         self.assertTrue(self.boy.is_invincible)
         self.clock.advance(0.1)
         self.boy.update()
-        self.assertAlmostEqual(self.boy.x, 430)
+        self.assertAlmostEqual(self.boy.x, 445)
         self.boy.draw()
         self.assertEqual(self.image.draw_calls[-1][-3], 105)
         self.assertEqual(self.image.draw_calls[-1][-2:], (150, 150))
