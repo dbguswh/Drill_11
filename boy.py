@@ -67,6 +67,8 @@ class Boy:
         self.face_dir = direction
         if self.state in ('IDLE', 'SLEEP'):
             self.start_running()
+        elif self.state == 'AUTORUN':
+            self.cancel_auto_run()
 
     def release_direction(self, direction):
         self.held_directions.discard(direction)
