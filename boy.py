@@ -31,6 +31,9 @@ class Boy:
                 {'trigger': 'wake_up', 'source': 'SLEEP', 'dest': 'IDLE', 'after': 'begin_idle'},
                 {'trigger': 'start_running', 'source': ['IDLE', 'SLEEP'], 'dest': 'RUN', 'after': 'begin_run'},
                 {'trigger': 'stop_running', 'source': 'RUN', 'dest': 'IDLE', 'after': 'begin_idle'},
+                {'trigger': 'activate_auto_run', 'source': 'IDLE', 'dest': 'AUTORUN', 'after': 'begin_auto_run'},
+                {'trigger': 'finish_auto_run', 'source': 'AUTORUN', 'dest': 'IDLE', 'after': 'begin_idle'},
+                {'trigger': 'cancel_auto_run', 'source': 'AUTORUN', 'dest': 'RUN', 'after': 'begin_run'},
             ],
             initial='IDLE',
             auto_transitions=False,
@@ -49,6 +52,9 @@ class Boy:
         self.frame = 0
         self.last_frame_time = time.monotonic()
         self.last_update_time = self.last_frame_time
+
+    def begin_auto_run(self):
+        self.auto_run.begin(self, time.monotonic())
 
     def press_direction(self, direction):
         if direction in self.held_directions:
